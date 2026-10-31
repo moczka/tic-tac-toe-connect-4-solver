@@ -1,13 +1,14 @@
+type Board = string[];
+
 class TicTacToe {
-    checkWinner() {
+    
+    checkWinner(board: Board): boolean {
         return false;
     };
-
-    anyMovesLeft() { 
+    anyMovesLeft(board: Board) { 
         return false;   
     }
-
-    isGameOver() {
+    isGameOver(board: Board) {
         return false;
     }
 }
