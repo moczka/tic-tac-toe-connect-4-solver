@@ -1,0 +1,19 @@
+{
+  "name": "tic-tac-toe-connect-4-solver",
+  "version": "1.0.0",
+  "description": "Solver tha checks for winner, any moves left and gameplay in a tic-tac-toe or connect four type game.",
+  "homepage": "https://github.com/moczka/tic-tac-toe-connect-4-solver#readme",
+  "bugs": {
+    "url": "https://github.com/moczka/tic-tac-toe-connect-4-solver/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moczka/tic-tac-toe-connect-4-solver.git"
+  },
+  "author": "Javier S Guerrero",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run tests"
+  }
+}
