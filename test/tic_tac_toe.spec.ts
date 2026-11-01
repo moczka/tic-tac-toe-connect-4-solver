@@ -422,3 +422,10 @@ describe("Checks for any winning players that has completed a 2x2 Box any where 
         assert.strictEqual(activeGame.checkWinner(board), 'O');
     });
 });
+
+describe("Determines when the game is over. ", () => {
+    const activeGame = new TicTacToe();
+    it("should be game over when there is no winner and the board is full.", () => {
+        assert.strictEqual(activeGame.isGameOver(STALE_BOARD), true);
+    });
+});
