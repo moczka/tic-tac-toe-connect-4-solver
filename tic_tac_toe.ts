@@ -38,7 +38,24 @@ class TicTacToe {
         return true;
     }
     #checkForHorizontal(board: Board, playerPos: number): boolean {
-        return false;
+        // Determine player type: 'O', 'X' o Empty
+        const playerType = board[playerPos];
+        // Empty cell
+        if (playerType === ' ')
+            return false;
+        // Retrieve player row position in logical grid.
+        const {row}: GridPosition = this.#arrayPosToGridPos(playerPos);
+        // Traverse entire column to check for completion.
+        for (let i=0; i<NUM_ROW; i++) {
+
+            const playerInCell = board[this.#gridPosToArrayPos({row, col: i})];
+            // Player is not winning in active column.
+            if (playerInCell !== playerType) {
+                return false;
+            }
+        }
+        // Player wins, has completed the full column.
+        return true;
     }
     #checkForDiagonal(board: Board, playerPos: number): boolean {
         return false;
@@ -56,6 +73,8 @@ class TicTacToe {
             const activePlayer = board[i];
             // Check for winning combinations for active player.
             if (this.#checkForVertical(board, i)) {
+                return activePlayer;
+            } else if (this.#checkForHorizontal(board, i)) {
                 return activePlayer;
             }
         }
