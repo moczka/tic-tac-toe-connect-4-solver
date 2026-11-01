@@ -244,3 +244,188 @@ describe("Checks for any winning players on all four corners of the board.", () 
         assert.strictEqual(activeGame.checkWinner(board), 'O');
     });
 });
+describe("Checks for any winning players that has completed a 2x2 Box any where on the board.", () => {
+    const activeGame = new TicTacToe();
+    // ---- X 2x2 box wins (X: 4 moves, O: 3 moves) ----
+    it("should find player X winning the 2x2 box at indices 0, 1, 4, 5.", () => {
+        const board = [
+            'X','X',' ',' ',
+            'X','X',' ',' ',
+            ' ',' ','O','O',
+            ' ',' ','O',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 1, 2, 5, 6.", () => {
+        const board = [
+            ' ','X','X',' ',
+            ' ','X','X',' ',
+            ' ',' ',' ',' ',
+            'O','O',' ','O'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 2, 3, 6, 7.", () => {
+        const board = [
+            ' ',' ','X','X',
+            ' ',' ','X','X',
+            'O','O',' ',' ',
+            'O',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 4, 5, 8, 9.", () => {
+        const board = [
+            ' ',' ','O','O',
+            'X','X',' ','O',
+            'X','X',' ',' ',
+            ' ',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 5, 6, 9, 10.", () => {
+        const board = [
+            'O',' ',' ','O',
+            ' ','X','X',' ',
+            ' ','X','X',' ',
+            ' ',' ',' ','O'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 6, 7, 10, 11.", () => {
+        const board = [
+            'O',' ',' ',' ',
+            'O',' ','X','X',
+            ' ',' ','X','X',
+            'O',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 8, 9, 12, 13.", () => {
+        const board = [
+            ' ',' ','O','O',
+            ' ',' ','O',' ',
+            'X','X',' ',' ',
+            'X','X',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 9, 10, 13, 14.", () => {
+        const board = [
+            'O','O',' ','O',
+            ' ',' ',' ',' ',
+            ' ','X','X',' ',
+            ' ','X','X',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning the 2x2 box at indices 10, 11, 14, 15.", () => {
+        const board = [
+            'O','O',' ',' ',
+            'O',' ',' ',' ',
+            ' ',' ','X','X',
+            ' ',' ','X','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    // ---- O 2x2 box wins (X: 4 moves, O: 4 moves) ----
+
+    it("should find player O winning the 2x2 box at indices 0, 1, 4, 5.", () => {
+        const board = [
+            'O','O',' ',' ',
+            'O','O',' ',' ',
+            'X','X','X',' ',
+            ' ',' ',' ','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 1, 2, 5, 6.", () => {
+        const board = [
+            ' ','O','O',' ',
+            ' ','O','O',' ',
+            'X','X','X',' ',
+            ' ',' ',' ','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 2, 3, 6, 7.", () => {
+        const board = [
+            ' ',' ','O','O',
+            ' ',' ','O','O',
+            'X','X','X',' ',
+            ' ',' ',' ','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 4, 5, 8, 9.", () => {
+        const board = [
+            ' ','X','X','X',
+            'O','O',' ',' ',
+            'O','O',' ',' ',
+            ' ',' ','X',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 5, 6, 9, 10.", () => {
+        const board = [
+            'X','X','X',' ',
+            ' ','O','O',' ',
+            ' ','O','O',' ',
+            ' ',' ',' ','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 6, 7, 10, 11.", () => {
+        const board = [
+            'X','X','X',' ',
+            ' ',' ','O','O',
+            ' ',' ','O','O',
+            'X',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 8, 9, 12, 13.", () => {
+        const board = [
+            ' ','X','X','X',
+            'X',' ',' ',' ',
+            'O','O',' ',' ',
+            'O','O',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 9, 10, 13, 14.", () => {
+        const board = [
+            'X','X','X',' ',
+            ' ',' ',' ','X',
+            ' ','O','O',' ',
+            ' ','O','O',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning the 2x2 box at indices 10, 11, 14, 15.", () => {
+        const board = [
+            'X','X','X',' ',
+            'X',' ',' ',' ',
+            ' ',' ','O','O',
+            ' ',' ','O','O'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+});
