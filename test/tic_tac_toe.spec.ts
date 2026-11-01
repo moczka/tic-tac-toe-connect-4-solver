@@ -222,3 +222,25 @@ describe("Checks for any winning players diagonally on the board.", () => {
         assert.strictEqual(activeGame.checkWinner(board), 'O');
     });
 });
+describe("Checks for any winning players on all four corners of the board.", () => {
+    const activeGame = new TicTacToe();
+    // ---- Four corners wins ----
+    it("should find player X winning the four corners (indices 0, 3, 12, 15).", () => {
+        const board = [
+            'X','O','O','X',
+            ' ','O',' ',' ',
+            ' ',' ',' ',' ',
+            'X',' ',' ','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+    it("should find player O winning the four corners (indices 0, 3, 12, 15).", () => {
+        const board = [
+            'O','X','X','O',
+            'X',' ',' ',' ',
+            ' ','X',' ',' ',
+            'O',' ',' ','O'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+});
