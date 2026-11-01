@@ -3,6 +3,7 @@ type GridPosition = {
     col: number,
     row: number
 };
+const PLAYER_TYPES = ['X', 'O'];
 const CORNER_INDEXES = [0, 3, 12, 15];
 // Define the number of columns and rows in the board.
 const NUM_COL = 4;
@@ -18,53 +19,52 @@ class TicTacToe {
             row: Math.trunc(arrayIndex / NUM_ROW)
         };
     }
-    #checkForVertical(board: Board, playerPos: number): boolean {
-        // Determine player type: 'O', 'X' o Empty
-        const playerType = board[playerPos];
-        // Empty cell
-        if (playerType === ' ')
-            return false;
-        // Retrieve player column position in logical grid.
-        const {col}: GridPosition = this.#arrayPosToGridPos(playerPos);
-        // Traverse entire column to check for completion.
-        for (let i=0; i<NUM_ROW; i++) {
+    #checkForVertical(board: Board, playerType: string): boolean {
 
-            const playerInCell = board[this.#gridPosToArrayPos({col, row: i})];
-            // Player is not winning in active column.
-            if (playerInCell !== playerType) {
-                return false;
+        // Traverse all columns to check for any complete configuration
+        for (let col = 0; col < NUM_COL; col++) {
+            // Assume column is complete
+            let hasCompleteColumn = true;
+            for (let row = 0; row < NUM_ROW; row++) {
+                const playerInCell = board[this.#gridPosToArrayPos({ col, row })];
+                // Player is not winning in active column.
+                if (playerInCell !== playerType) {
+                    hasCompleteColumn = false;
+                    // No sense continuing to check in current column.
+                    break;
+                }
+            }
+            // Player wins since active column is complete.
+            if (hasCompleteColumn) {
+                return true;
             }
         }
-        // Player wins, has completed the full column.
-        return true;
+        return false;
     }
-    #checkForHorizontal(board: Board, playerPos: number): boolean {
-        // Determine player type: 'O', 'X' o Empty
-        const playerType = board[playerPos];
-        // Empty cell
-        if (playerType === ' ')
-            return false;
-        // Retrieve player row position in logical grid.
-        const {row}: GridPosition = this.#arrayPosToGridPos(playerPos);
-        // Traverse entire column to check for completion.
-        for (let i=0; i<NUM_COL; i++) {
+    #checkForHorizontal(board: Board, playerType: string): boolean {
 
-            const playerInCell = board[this.#gridPosToArrayPos({col: i, row})];
-            // Player is not winning in active row.
-            if (playerInCell !== playerType) {
-                return false;
+        // Traverse all rows to check for any complete configuration
+        for (let row = 0; row < NUM_ROW; row++) {
+            // Assume row is complete
+            let hasCompleteRow = true;
+            for (let col = 0; col < NUM_COL; col++) {
+                const playerInCell = board[this.#gridPosToArrayPos({ col, row })];
+                // Player is not winning in active column.
+                if (playerInCell !== playerType) {
+                    hasCompleteRow = false;
+                    // No sense continuing to check current row.
+                    break;
+                }
+            }
+            // Player wins since active row is complete.
+            if (hasCompleteRow) {
+                return true;
             }
         }
-        // Player wins, has completed the full row.
-        return true;
+        return false;
     }
-    #checkForDiagonal(board: Board, playerPos: number): boolean {
-        // Determine player type: 'O', 'X' o Empty
-        const playerType = board[playerPos];
-        // Empty cell
-        if (playerType === ' ') {
-            return false;
-        }
+    #checkForDiagonal(board: Board, playerType: string): boolean {
+
         let completeTopLeftDiagonal = true;
         // Check across starting from top-left most position.
         for (let i=0; i<NUM_COL; i++) {
@@ -104,21 +104,20 @@ class TicTacToe {
         return false;
     }
     checkWinner(board: Board): string {
-        // Traverse entire board looking for winner.
-        for (let i=0; i<(NUM_COL * NUM_ROW); i++) {
-    
-            const activePlayer = board[i];
-            // Check for winning combinations for active player.
-            if (this.#checkForVertical(board, i)) {
-                return activePlayer;
-            } else if (this.#checkForHorizontal(board, i)) {
-                return activePlayer;
-            } else if (this.#checkForDiagonal(board, i)) {
-                return activePlayer;
+        
+        const winner: string | undefined = PLAYER_TYPES.find(playerType => {
+            if (this.#checkForVertical(board, playerType)) {
+                return true;
+            } else if (this.#checkForHorizontal(board, playerType)) {
+                return true;
+            } else if (this.#checkForDiagonal(board, playerType)) {
+                return true;
             }
-        }
-        // No winner was found.
-        return '';
+            return false;
+        });
+
+
+        return winner || '';
     };
     anyMovesLeft(board: Board) { 
         return false;   
