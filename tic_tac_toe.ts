@@ -3,6 +3,7 @@ type GridPosition = {
     col: number,
     row: number
 };
+const CORNER_INDEXES = [0, 3, 12, 15];
 // Define the number of columns and rows in the board.
 const NUM_COL = 4;
 const NUM_ROW = 4;
@@ -46,9 +47,9 @@ class TicTacToe {
         // Retrieve player row position in logical grid.
         const {row}: GridPosition = this.#arrayPosToGridPos(playerPos);
         // Traverse entire column to check for completion.
-        for (let i=0; i<NUM_ROW; i++) {
+        for (let i=0; i<NUM_COL; i++) {
 
-            const playerInCell = board[this.#gridPosToArrayPos({row, col: i})];
+            const playerInCell = board[this.#gridPosToArrayPos({col: i, row})];
             // Player is not winning in active column.
             if (playerInCell !== playerType) {
                 return false;
@@ -58,7 +59,29 @@ class TicTacToe {
         return true;
     }
     #checkForDiagonal(board: Board, playerPos: number): boolean {
-        return false;
+        // Determine player type: 'O', 'X' o Empty
+        const playerType = board[playerPos];
+        // Empty cell
+        if (playerType === ' ') {
+            return false;
+        }
+        // Check across from top-left most position.
+        for (let i=0; i<NUM_COL; i++) {
+            const playerInCell = board[this.#gridPosToArrayPos({col: i, row: i})];
+            // Player is not winning in active column.
+            if (playerInCell !== playerType) {
+                return false;
+            }
+        }
+        // Check across from top-right most position
+        for (let i=NUM_COL-1; i>=0; i--) {
+            const playerInCell = board[this.#gridPosToArrayPos({col: i, row: (NUM_ROW - 1) - i})];
+            // Player is not winning in active column.
+            if (playerInCell !== playerType) {
+                return false;
+            }
+        }
+        return true;
     }
     #checkForCorners(board: Board, playerPos: number): boolean {
         return false;
@@ -75,6 +98,8 @@ class TicTacToe {
             if (this.#checkForVertical(board, i)) {
                 return activePlayer;
             } else if (this.#checkForHorizontal(board, i)) {
+                return activePlayer;
+            } else if (this.#checkForDiagonal(board, i)) {
                 return activePlayer;
             }
         }
