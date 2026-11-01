@@ -129,11 +129,20 @@ class TicTacToe {
 
         return winner || '';
     };
-    anyMovesLeft(board: Board) { 
-        return false;   
+    anyMovesLeft(board: Board) {
+        // Traverse entire board looking for empty cells
+        // NOTE: As long as there is an empty cell, there is at least one move left.
+        return board.some(playerInCell => {
+            return playerInCell === ' ';
+        });
     }
     isGameOver(board: Board) {
-        return false;
+        // Considered to be over when there is a winner 
+        // Or when there is no current winner and there are no moves left.
+        const winner = this.checkWinner(board);
+
+        return winner !== '' || !this.anyMovesLeft(board);
+
     }
 }
 
