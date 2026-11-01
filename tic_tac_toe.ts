@@ -49,18 +49,18 @@ class TicTacToe {
     #checkForBox(board: Board, playerPos: number): boolean {
         return false;
     }
-    checkWinner(board: Board): boolean {
+    checkWinner(board: Board): string {
         // Traverse entire board looking for winner.
         for (let i=0; i<(NUM_COL * NUM_ROW); i++) {
     
             const activePlayer = board[i];
             // Check for winning combinations for active player.
             if (this.#checkForVertical(board, i)) {
-                return true;
+                return activePlayer;
             }
         }
         // No winner was found.
-        return false;
+        return '';
     };
     anyMovesLeft(board: Board) { 
         return false;   

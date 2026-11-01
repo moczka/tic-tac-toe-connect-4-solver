@@ -18,6 +18,6 @@ const STALE_BOARD = [
 describe("Checks for any winning players on the board.", () => {
     const activeGame = new TicTacToe();
     it("should not find any completed columns in a stalemate endgame.", () => {
-        assert.strictEqual(activeGame.checkWinner(STALE_BOARD), false)
+        assert.strictEqual(activeGame.checkWinner(STALE_BOARD), '')
     });
 });
