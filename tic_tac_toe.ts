@@ -13,12 +13,6 @@ class TicTacToe {
     #gridPosToArrayPos(position: GridPosition): number {
         return (position.row * NUM_ROW) + position.col;
     }
-    #arrayPosToGridPos(arrayIndex: number): GridPosition {
-        return {
-            col: arrayIndex % NUM_COL,
-            row: Math.trunc(arrayIndex / NUM_ROW)
-        };
-    }
     #checkForVertical(board: Board, playerType: string): boolean {
 
         // Traverse all columns to check for any complete configuration
