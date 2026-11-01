@@ -87,13 +87,7 @@ class TicTacToe {
         }
         return (completeTopLeftDiagonal || completeTopRightDiagonal);
     }
-    #checkForCorners(board: Board, playerPos: number): boolean {
-        // Determine player type: 'O', 'X' o Empty
-        const playerType = board[playerPos];
-        // Empty cell
-        if (playerType === ' ') {
-            return false;
-        }
+    #checkForCorners(board: Board, playerType: string): boolean {
         // Player type must match at all four corners
         return CORNER_INDEXES.every(index => {
             const playerAtCorner = board[index];
@@ -111,6 +105,8 @@ class TicTacToe {
             } else if (this.#checkForHorizontal(board, playerType)) {
                 return true;
             } else if (this.#checkForDiagonal(board, playerType)) {
+                return true;
+            } else if (this.#checkForCorners(board, playerType)) {
                 return true;
             }
             return false;
