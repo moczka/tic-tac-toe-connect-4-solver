@@ -95,7 +95,7 @@ describe("Checks for any winning players vertically on the board.", () => {
         assert.strictEqual(activeGame.checkWinner(board), 'O');
     });
 });
-describe("Checks for any player winning by completing horizontally on the board.", () => {
+describe("Checks for any winning players horizontally on the board.", () => {
     const activeGame = new TicTacToe();
 
     it("should find player X winning row 1 (indices 0, 1, 2, 3).", () => {
@@ -181,7 +181,7 @@ describe("Checks for any player winning by completing horizontally on the board.
     });
 });
 
-describe("Checks for any winning players vertically on the board.", () => {
+describe("Checks for any winning players diagonally on the board.", () => {
     const activeGame = new TicTacToe();
     // ---- X diagonal wins (X: 4 moves, O: 3 moves) ----
     it("should find player X winning the main diagonal (indices 0, 5, 10, 15).", () => {
