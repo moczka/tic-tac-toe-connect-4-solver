@@ -1,3 +1,9 @@
+/*
+    NOTE: Exhaustive assertions generated with the assistance of Claude Code.
+    Link: https://claude.ai/share/63a2c8f1-7b29-4c0a-bc38-c554bd75642f
+
+*/
+
 import TicTacToe from "../tic_tac_toe.ts";
 import {strict as assert} from "node:assert";
 
