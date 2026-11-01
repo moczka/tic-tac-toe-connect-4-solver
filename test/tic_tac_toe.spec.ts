@@ -1,13 +1,6 @@
 import TicTacToe from "../tic_tac_toe.ts";
 import {strict as assert} from "node:assert";
 
-// Used to test the edge cases
-const EMPTY_BOARD = [
-    ' ', ' ', ' ', ' ',
-    ' ', ' ', ' ', ' ',
-    ' ', ' ', ' ', ' ',
-    ' ', ' ', ' ', ' ',
-];
 const STALE_BOARD = [
     'X','X','O','O',
     'O','O','X','X',
