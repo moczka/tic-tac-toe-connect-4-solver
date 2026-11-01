@@ -94,7 +94,24 @@ class TicTacToe {
             return playerType === playerAtCorner;
         });
     }
-    #checkForBox(board: Board, playerPos: number): boolean {
+    #checkForBox(board: Board, playerType: string): boolean {
+
+        // Traverse game board looking for 2x2 boxes
+        for (let col = 0; col < (NUM_COL -1); col++) {
+
+            for (let row = 0; row < (NUM_ROW-1); row++) {
+                // Retrieve player types from adjacent cells on the board
+                const nextCell = board[this.#gridPosToArrayPos({ col: col + 1, row})];
+                const bottomCell = board[this.#gridPosToArrayPos({ col: col, row: row + 1})];
+                const bottomRightCell = board[this.#gridPosToArrayPos({ col: col + 1, row: row + 1 })];
+
+                // (2x2) Box found!
+                if (playerType === nextCell && playerType === bottomCell && playerType === bottomRightCell) {
+                    return true;
+                }
+            }
+        }
+        // No 2x2 box were found on the board.
         return false;
     }
     checkWinner(board: Board): string {
@@ -108,7 +125,10 @@ class TicTacToe {
                 return true;
             } else if (this.#checkForCorners(board, playerType)) {
                 return true;
+            } else if (this.#checkForBox(board, playerType)) {
+                return true;
             }
+            // Player doesn't meet any of the winning configurations.
             return false;
         });
 
