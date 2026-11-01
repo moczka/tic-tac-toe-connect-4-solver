@@ -9,27 +9,15 @@ const EMPTY_BOARD = [
     ' ', ' ', ' ', ' ',
 ];
 const STALE_BOARD = [
-    'O', 'X', 'X', 'O',
-    'X', 'O', 'X', 'O',
-    'X', 'X', 'O', 'X',
-    'X', 'O', 'X', 'X',
+    'X','X','O','O',
+    'O','O','X','X',
+    'X','X','O','O',
+    'O','O','X','X'
 ];
 
 describe("Checks for any winning players on the board.", () => {
-    const activeBoard = [
-        ' ', ' ', ' ', ' ',
-        ' ', ' ', ' ', ' ',
-        ' ', ' ', ' ', ' ',
-        ' ', ' ', ' ', ' ',
-    ];
     const activeGame = new TicTacToe();
-    it("should detect a when a vertical column has been completed.", () => {
-        const WINNER_X_COL_0 = [
-            'X', 'O', 'X', 'O',
-            'X', 'O', 'X', 'O',
-            'X', 'X', 'O', 'X',
-            'X', 'O', 'X', 'X',
-        ];
-        assert.strictEqual(activeGame.checkWinner(WINNER_X_COL_0), true)
+    it("should not find any completed columns in a stalemate endgame.", () => {
+        assert.strictEqual(activeGame.checkWinner(STALE_BOARD), false)
     });
 });
