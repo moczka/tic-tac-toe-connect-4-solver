@@ -8,31 +8,58 @@ const NUM_COL = 4;
 const NUM_ROW = 4;
 
 class TicTacToe {
-    #gridToArrayPos(position: GridPosition): number {
+    #gridPosToArrayPos(position: GridPosition): number {
         return (position.row * NUM_ROW) + position.col;
     }
-    #arrayPosToGrid(arrayIndex: number): GridPosition {
+    #arrayPosToGridPos(arrayIndex: number): GridPosition {
         return {
             col: arrayIndex % NUM_COL,
             row: Math.trunc(arrayIndex / NUM_ROW)
         };
     }
-    #checkForVertical(board: Board, arrayPos: number): boolean {
+    #checkForVertical(board: Board, playerPos: number): boolean {
+        // Determine player type: 'O', 'X' o Empty
+        const playerType = board[playerPos];
+        // Empty cell
+        if (playerType === ' ')
+            return false;
+        // Retrieve player column position in logical grid.
+        const {col}: GridPosition = this.#arrayPosToGridPos(playerPos);
+        // Traverse entire column to check for completion.
+        for (let i=0; i<NUM_ROW; i++) {
+
+            const playerInCell = board[this.#gridPosToArrayPos({col, row: i})];
+            // Player is not winning in active column.
+            if (playerInCell !== playerType) {
+                return false;
+            }
+        }
+        // Player wins, has completed the full column.
+        return true;
+    }
+    #checkForHorizontal(board: Board, playerPos: number): boolean {
         return false;
     }
-    #checkForHorizontal(board: Board, arrayPos: number): boolean {
+    #checkForDiagonal(board: Board, playerPos: number): boolean {
         return false;
     }
-    #checkForDiagonal(board: Board, arrayPos: number): boolean {
+    #checkForCorners(board: Board, playerPos: number): boolean {
         return false;
     }
-    #checkForCorners(board: Board, arrayPos: number): boolean {
-        return false;
-    }
-    #checkForBox(board: Board, arrayPos: number): boolean {
+    #checkForBox(board: Board, playerPos: number): boolean {
         return false;
     }
     checkWinner(board: Board): boolean {
+        // Traverse entire board looking for winner.
+        for (let i=0; i<(NUM_COL * NUM_ROW); i++) {
+    
+            const activePlayer = board[i];
+            // Check for winning combinations for active player.
+            if (this.#checkForVertical(board, i)) {
+                return true;
+            }
+        }
+        // No winner was found.
         return false;
     };
     anyMovesLeft(board: Board) { 

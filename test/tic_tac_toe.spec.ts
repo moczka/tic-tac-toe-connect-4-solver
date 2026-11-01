@@ -22,7 +22,14 @@ describe("Checks for any winning players on the board.", () => {
         ' ', ' ', ' ', ' ',
         ' ', ' ', ' ', ' ',
     ];
+    const activeGame = new TicTacToe();
     it("should detect a when a vertical column has been completed.", () => {
-        assert(true, true);
+        const WINNER_X_COL_0 = [
+            'X', 'O', 'X', 'O',
+            'X', 'O', 'X', 'O',
+            'X', 'X', 'O', 'X',
+            'X', 'O', 'X', 'X',
+        ];
+        assert.strictEqual(activeGame.checkWinner(WINNER_X_COL_0), true)
     });
 });
