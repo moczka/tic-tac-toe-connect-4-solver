@@ -15,7 +15,7 @@ const STALE_BOARD = [
     'O','O','X','X'
 ];
 
-describe("Checks for any winning players on the board.", () => {
+describe("Checks for any winning players vertically on the board.", () => {
     const activeGame = new TicTacToe();
     it("should not find any completed columns in a stalemate endgame.", () => {
         assert.strictEqual(activeGame.checkWinner(STALE_BOARD), '')
@@ -91,6 +91,92 @@ describe("Checks for any winning players on the board.", () => {
             ' ',' ','X','O',
             ' ',' ','X','O',
             ' ',' ',' ','O'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+});
+
+describe("Checks for any winning players vertically on the board.", () => {
+    const activeGame = new TicTacToe();
+
+    it("should find player X winning row 1 (indices 0, 1, 2, 3).", () => {
+        const board = [
+            'X','X','X','X',
+            'O','O','O',' ',
+            ' ',' ',' ',' ',
+            ' ',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning row 2 (indices 4, 5, 6, 7).", () => {
+        const board = [
+            'O','O','O',' ',
+            'X','X','X','X',
+            ' ',' ',' ',' ',
+            ' ',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning row 3 (indices 8, 9, 10, 11).", () => {
+        const board = [
+            ' ',' ',' ',' ',
+            ' ',' ',' ',' ',
+            'X','X','X','X',
+            'O','O','O',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    it("should find player X winning row 4 (indices 12, 13, 14, 15).", () => {
+        const board = [
+            ' ',' ',' ',' ',
+            ' ',' ',' ',' ',
+            'O','O','O',' ',
+            'X','X','X','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+
+    // ---- O horizontal wins (X: 4 moves, O: 4 moves) ----
+
+    it("should find player O winning row 1 (indices 0, 1, 2, 3).", () => {
+        const board = [
+            'O','O','O','O',
+            'X','X','X',' ',
+            'X',' ',' ',' ',
+            ' ',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning row 2 (indices 4, 5, 6, 7).", () => {
+        const board = [
+            'X','X','X',' ',
+            'O','O','O','O',
+            'X',' ',' ',' ',
+            ' ',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning row 3 (indices 8, 9, 10, 11).", () => {
+        const board = [
+            ' ',' ',' ',' ',
+            'X',' ',' ',' ',
+            'O','O','O','O',
+            'X','X','X',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+
+    it("should find player O winning row 4 (indices 12, 13, 14, 15).", () => {
+        const board = [
+            ' ',' ',' ',' ',
+            'X',' ',' ',' ',
+            'X','X','X',' ',
+            'O','O','O','O'
         ];
         assert.strictEqual(activeGame.checkWinner(board), 'O');
     });
