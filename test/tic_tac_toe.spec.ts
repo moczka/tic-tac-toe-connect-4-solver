@@ -95,7 +95,6 @@ describe("Checks for any winning players vertically on the board.", () => {
         assert.strictEqual(activeGame.checkWinner(board), 'O');
     });
 });
-
 describe("Checks for any winning players vertically on the board.", () => {
     const activeGame = new TicTacToe();
 
@@ -177,6 +176,48 @@ describe("Checks for any winning players vertically on the board.", () => {
             'X',' ',' ',' ',
             'X','X','X',' ',
             'O','O','O','O'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+});
+
+describe("Checks for any winning players vertically on the board.", () => {
+    const activeGame = new TicTacToe();
+    // ---- X diagonal wins (X: 4 moves, O: 3 moves) ----
+    it("should find player X winning the main diagonal (indices 0, 5, 10, 15).", () => {
+        const board = [
+            'X','O','O','O',
+            ' ','X',' ',' ',
+            ' ',' ','X',' ',
+            ' ',' ',' ','X'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+    it("should find player X winning the anti-diagonal (indices 3, 6, 9, 12).", () => {
+        const board = [
+            'O','O','O','X',
+            ' ',' ','X',' ',
+            ' ','X',' ',' ',
+            'X',' ',' ',' '
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'X');
+    });
+    // ---- O diagonal wins (X: 4 moves, O: 4 moves) ----
+    it("should find player O winning the main diagonal (indices 0, 5, 10, 15).", () => {
+        const board = [
+            'O','X','X','X',
+            'X','O',' ',' ',
+            ' ',' ','O',' ',
+            ' ',' ',' ','O'
+        ];
+        assert.strictEqual(activeGame.checkWinner(board), 'O');
+    });
+    it("should find player O winning the anti-diagonal (indices 3, 6, 9, 12).", () => {
+        const board = [
+            'X','X','X','O',
+            'X',' ','O',' ',
+            ' ','O',' ',' ',
+            'O',' ',' ',' '
         ];
         assert.strictEqual(activeGame.checkWinner(board), 'O');
     });
