@@ -50,12 +50,12 @@ class TicTacToe {
         for (let i=0; i<NUM_COL; i++) {
 
             const playerInCell = board[this.#gridPosToArrayPos({col: i, row})];
-            // Player is not winning in active column.
+            // Player is not winning in active row.
             if (playerInCell !== playerType) {
                 return false;
             }
         }
-        // Player wins, has completed the full column.
+        // Player wins, has completed the full row.
         return true;
     }
     #checkForDiagonal(board: Board, playerPos: number): boolean {
@@ -65,26 +65,40 @@ class TicTacToe {
         if (playerType === ' ') {
             return false;
         }
-        // Check across from top-left most position.
+        let completeTopLeftDiagonal = true;
+        // Check across starting from top-left most position.
         for (let i=0; i<NUM_COL; i++) {
             const playerInCell = board[this.#gridPosToArrayPos({col: i, row: i})];
-            // Player is not winning in active column.
+            // Player is not winning in active diagonal.
             if (playerInCell !== playerType) {
-                return false;
+                completeTopLeftDiagonal = false;
+                break;
             }
         }
-        // Check across from top-right most position
+        let completeTopRightDiagonal = true;
+        // Check across starting from top-right most position
         for (let i=NUM_COL-1; i>=0; i--) {
             const playerInCell = board[this.#gridPosToArrayPos({col: i, row: (NUM_ROW - 1) - i})];
-            // Player is not winning in active column.
+            // Player is not winning in active diagonal.
             if (playerInCell !== playerType) {
-                return false;
+                completeTopRightDiagonal = false;
+                break;
             }
         }
-        return true;
+        return (completeTopLeftDiagonal || completeTopRightDiagonal);
     }
     #checkForCorners(board: Board, playerPos: number): boolean {
-        return false;
+        // Determine player type: 'O', 'X' o Empty
+        const playerType = board[playerPos];
+        // Empty cell
+        if (playerType === ' ') {
+            return false;
+        }
+        // Player type must match at all four corners
+        return CORNER_INDEXES.every(index => {
+            const playerAtCorner = board[index];
+            return playerType === playerAtCorner;
+        });
     }
     #checkForBox(board: Board, playerPos: number): boolean {
         return false;
